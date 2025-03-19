@@ -21,6 +21,9 @@ def get_args():
     parser.add_argument(
         "--model", type=str, default="model", help="the root folder of the data"
     )
+    parser.add_argument(
+        "--data", type=str, default="model", help="the root folder of the data"
+    )
     args = parser.parse_args()
     return args
 
@@ -41,6 +44,7 @@ categories = [
     "tshirt",
 ]
 load_dotenv()
+args = get_args()
 
 
 def extract_feature(
@@ -97,7 +101,7 @@ transform_test = Compose(
     ]
 )
 
-data_path = r"D:\Python\AI_Learning\Computer_Vision\IntroAI_Project-Clothes_Recommendation_System\datasets_infer"
+data_path = args.data
 train_data = ClotheDatasetSave(
     datasets_path=data_path,
     part="train",
@@ -109,8 +113,6 @@ train_dataloader = DataLoader(
 )
 
 print("done preparing data")
-
-args = get_args()
 extract_feature(
     args.model_path,
     ResNet50(len(categories)),
