@@ -80,10 +80,13 @@ def extract_feature(
 
         docs = []
 
-        for name, feature, l in zip(names, features, label):
-            l = torch.argmax(l)
-            print(l)
-            doc = {"name": name, "feature": feature, "label": categories[int(l)]}
+        for name, feature, lst in zip(names, features, label):
+            max_index = lst.index(max(lst))
+            doc = {
+                "name": name,
+                "feature": feature,
+                "label": categories[int(max_index)],
+            }
             docs.append(doc)
             doc_count += 1
         # for doc in features
