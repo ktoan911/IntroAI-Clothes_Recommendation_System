@@ -80,8 +80,8 @@ def extract_feature(
 
         docs = []
 
-        for name, feature, label in zip(names, features, label):
-            doc = {"name": name, "feature": feature, "label": categories[int(label)]}
+        for name, feature, l in zip(names, features, label):
+            doc = {"name": name, "feature": feature, "label": categories[int(l)]}
             docs.append(doc)
             doc_count += 1
         # for doc in features
