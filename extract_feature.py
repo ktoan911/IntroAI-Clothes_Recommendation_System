@@ -114,7 +114,7 @@ train_dataloader = DataLoader(
 
 print("done preparing data")
 extract_feature(
-    args.model_path,
+    args.model,
     ResNet50(len(categories)),
     train_dataloader,
 )
