@@ -52,18 +52,15 @@ if uploaded_file is not None:
                     loaded_bytes.append(None)
             st.session_state.loaded_images_bytes = loaded_bytes
 
-        # Sử dụng slider để chọn ảnh gợi ý
-        selected_index = st.slider("Chọn ảnh gợi ý", 0, len(img_paths) - 1, 0, step=1)
-
-        # Hiển thị ảnh gợi ý dựa trên giá trị slider
-        current_image_bytes = st.session_state.loaded_images_bytes[selected_index]
-        if current_image_bytes is not None:
-            st.image(
-                current_image_bytes,
-                caption=f"Ảnh gợi ý {label} {selected_index + 1}/{len(img_paths)}  ",
-                use_container_width=True,
-            )
-        else:
-            st.write("Không tìm thấy ảnh gợi ý cho ảnh này.")
+        # In ra tất cả các ảnh gợi ý cùng lúc
+        for i, img_bytes in enumerate(st.session_state.loaded_images_bytes):
+            if img_bytes is not None:
+                st.image(
+                    img_bytes,
+                    caption=f"Ảnh gợi ý {label} {i+1}/{len(img_paths)}",
+                    use_container_width=True,
+                )
+            else:
+                st.write(f"Không tìm thấy ảnh gợi ý cho ảnh {i+1}.")
     else:
         st.write("Không có ảnh gợi ý nào được tìm thấy.")
