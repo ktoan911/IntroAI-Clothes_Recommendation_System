@@ -41,20 +41,17 @@ categories = [
 
 
 def top_k_cosine_indices(vector, cursor, k=5):
-    # Chuyển đổi thành numpy array
     vector = np.array(vector)
     list_of_vectors = [doc["feature"] for doc in cursor]
     names = [doc["name"] for doc in cursor]
-    matrix = np.array(list_of_vectors)  # (N, 2048)
+    matrix = np.array(list_of_vectors) 
 
-    # Tính cosine similarity
-    dot_product = np.dot(matrix, vector)  # (N,)
-    norm_matrix = np.linalg.norm(matrix, axis=1)  # (N,)
-    norm_vector = np.linalg.norm(vector)  # (scalar)
+    dot_product = np.dot(matrix, vector) 
+    norm_matrix = np.linalg.norm(matrix, axis=1)  
+    norm_vector = np.linalg.norm(vector)
 
-    cosine_similarities = dot_product / (norm_matrix * norm_vector)  # (N,)
+    cosine_similarities = dot_product / (norm_matrix * norm_vector)  
 
-    # Lấy top k indices có cosine similarity cao nhất
     top_k_indices = np.argsort(cosine_similarities)[-k:][::-1]
 
     return [names[i] for i in top_k_indices]
