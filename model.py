@@ -188,4 +188,4 @@ class ResNet50(nn.Module):
         avg = self.flatten(x)
         x = self.ffn(avg)
 
-        return x, avg
+        return x
