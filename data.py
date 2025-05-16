@@ -21,6 +21,8 @@ class ClotheDataset(Dataset):
             self.id2label[i] = cat
             self.label2id[cat] = i
 
+        print(self.id2label)
+
         self.images = []
         self.labels = []
 
